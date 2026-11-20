@@ -1,72 +1,34 @@
-# DignityLink — Menstrual Hygiene Education by SMS and WhatsApp
+# DignityLink – Menstrual Hygiene Education Platform
 
-DignityLink is a full-stack MERN prototype built for the **InnovateHER Hackathon (Girls Who Code — Women's Health & Wellness Track)** by Justice Jatau. It supports community volunteers distributing reusable menstrual hygiene kits in IDP camps and rural communities by capturing informed consent, delivering a 12-week bilingual (English and Hausa) SMS/WhatsApp curriculum via a swappable mock provider layer, and capturing two-way feedback (`1` = helpful, `2` = question, `STOP` = opt-out).
+DignityLink is a community-focused digital health platform designed to improve menstrual hygiene awareness among women and girls in Internally Displaced Persons (IDP) camps and rural communities.
 
-## Project Structure
+The platform uses SMS and WhatsApp to deliver short, culturally appropriate menstrual hygiene education messages, making essential health information accessible even to people without smartphones or reliable internet connectivity.
 
-- `client/` — React + Tailwind CSS frontend (Program Overview, Sign In modal, Volunteer & Coordinator Dashboard, Beneficiary Registration & Consent Gate, 12-Week Message Library, Simulated Phone Drawer & Tab, Feedback & Mock Provider Audit Logs, Architecture & Roadmap)
-- `server/` — Node.js + Express.js + Mongoose + JWT + `node-cron` backend, shared `IMessagingProvider` interface, `MockSmsProvider`, `MockWhatsAppProvider`, and seed scripts
-- `server.ts` — Unified entry point serving both the API and frontend on port `3000`
+Local volunteers can register beneficiaries, capture informed consent, manage registrations, and monitor message delivery and feedback through a centralized dashboard.
 
-## 1. Install Dependencies
+### Key Features
 
-```bash
-npm install
-```
+- **Beneficiary Registration:** Register beneficiaries with their names, phone numbers, preferred languages, and communities.
+- **Consent Management:** Capture informed consent, including parental or guardian consent for beneficiaries under 18.
+- **Automated Messaging:** Schedule educational messages using Node.js and node-cron.
+- **SMS & WhatsApp Integration:** Configurable messaging architecture with mock providers for the prototype.
+- **Multilingual Content:** Supports English and Hausa message libraries.
+- **Feedback Management:** Capture beneficiary responses and display feedback on the dashboard.
+- **Opt-out Management:** Allow beneficiaries to stop receiving messages.
+- **Volunteer Dashboard:** Monitor registrations, message activity, and feedback by community.
+- **JWT Authentication:** Secure volunteer and coordinator access with role-based permissions.
 
-## 2. Configure Environment Variables
+### Tech Stack
 
-Copy `.env.example` to `.env` and set your MongoDB connection string and JWT secret:
+- Frontend: React, Tailwind CSS
+- Backend: Node.js, Express.js
+- Database: MongoDB, Mongoose
+- Authentication: JSON Web Tokens (JWT)
+- Scheduling: node-cron
+- Messaging: Mock SMS and WhatsApp providers
 
-```bash
-cp .env.example .env
-```
+### Project Goal
 
-Required variables in `.env`:
+To make menstrual hygiene education more accessible, affordable, and sustainable by combining low-bandwidth digital communication with community-based support.
 
-```env
-MONGODB_URI="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/dignitylink?retryWrites=true&w=majority"
-JWT_SECRET="replace-with-a-strong-random-secret"
-PORT=3000
-MESSAGING_PROVIDER_MODE="mock"
-SCHEDULER_CRON="0 8 * * *"
-```
-
-## 3. Populate the Database (Seed Data)
-
-The server automatically seeds initial demo data on startup if the database is empty. You can also run or reset the seed explicitly:
-
-```bash
-npm run seed
-# Or force-reset and reseed all collections:
-npx tsx server/seed/seedRunner.ts --force
-```
-
-Demo accounts created by the seed script:
-- **Volunteer** (scoped to `Bakassi IDP Camp`): `amina.volunteer@dignitylink.org` / `DignityVol2026!`
-- **Coordinator** (access to all communities & curriculum editing): `grace.coordinator@dignitylink.org` / `DignityCoord2026!`
-
-## 4. Run the Application
-
-### Unified Full-Stack Mode (Port 3000)
-
-```bash
-npm run dev
-```
-
-### Standalone Backend & Frontend Terminals
-
-```bash
-# Terminal 1: Backend API on port 5000
-STANDALONE_API_ONLY=true PORT=5000 npm run dev:server
-
-# Terminal 2: Vite Frontend on port 5173 (proxies /api to localhost:5000)
-npm run dev:client
-```
-
-### Production Build & Start
-
-```bash
-npm run build
-npm start
-```
+**Note:** This is a working hackathon prototype. SMS and WhatsApp delivery are simulated through mock providers. Real messaging integrations are planned for future deployment.
