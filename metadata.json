@@ -1,0 +1,6 @@
+{
+  "name": "DignityLink",
+  "description": "Menstrual hygiene education delivery by SMS and WhatsApp for IDP camps and rural communities, with consent tracking, 12-week scheduling, and mock provider simulation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
